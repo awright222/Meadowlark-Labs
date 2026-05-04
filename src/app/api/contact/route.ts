@@ -78,7 +78,7 @@ export async function POST(request: NextRequest) {
 
     // ── Send email ──────────────────────────────
     const { error } = await getResend().emails.send({
-      from: "Meadowlark Labs <contact@meadowlark-labs.com>",
+      from: "Meadowlark Labs <alex@meadowlark-labs.com>",
       replyTo: safeEmail,
       to: TO_EMAIL,
       subject: `New inquiry from ${safeName}`,
