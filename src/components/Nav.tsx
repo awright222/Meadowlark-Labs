@@ -20,11 +20,11 @@ export default function Nav() {
         {/* Wordmark */}
         <Link href="/" className="flex items-center gap-3 group">
           <Image
-            src="/logo.png"
+            src="/logowhite.png"
             alt="Meadowlark Labs"
             width={52}
             height={52}
-            className="object-contain brightness-0 invert"
+            className="object-contain"
           />
           <span
             className="text-sm font-medium tracking-wide"
