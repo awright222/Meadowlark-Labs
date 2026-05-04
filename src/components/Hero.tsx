@@ -21,9 +21,11 @@ export default function Hero() {
             color: "var(--foreground)",
           }}
         >
-          We build
+          We build tools
           <br />
-          software.
+          for real-world
+          <br />
+          decisions.
         </h1>
 
         <p
@@ -31,7 +33,7 @@ export default function Hero() {
           style={{ color: "var(--muted)" }}
         >
           Meadowlark Labs is a small product studio. We ship focused web
-          applications and take on a handful of client projects each year.
+          applications and occasionally collaborate with outside teams.
         </p>
 
         <div className="mt-16 flex items-center gap-3">

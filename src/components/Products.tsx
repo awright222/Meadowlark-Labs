@@ -3,29 +3,25 @@
 const products = [
   {
     name: "DealForge",
-    description:
-      "Deal analysis and offer generation platform for real estate investors.",
+    tagline: "Analyze real estate and business deals in minutes.",
     status: "Live",
     href: "https://dealforgehq.com",
   },
   {
     name: "BuildGrade",
-    description:
-      "Construction bid and project management tools for residential builders.",
+    tagline: "Estimate construction costs with realistic inputs.",
     status: "Live",
     href: "https://buildgrade.io",
   },
   {
     name: "YardCalc",
-    description:
-      "Instant material estimator for landscaping and outdoor projects.",
+    tagline: "Fast material calculators for outdoor projects.",
     status: "Live",
     href: "https://yardcalc.app",
   },
   {
     name: "OppMap",
-    description:
-      "Market opportunity mapping for commercial real estate prospecting.",
+    tagline: "Screen real estate opportunities by market signals.",
     status: "Beta",
     href: "https://oppmap.io",
   },
@@ -105,7 +101,7 @@ export default function Products() {
                 </span>
               </div>
               <p className="text-sm leading-relaxed mb-6" style={{ color: "var(--muted)" }}>
-                {p.description}
+                {p.tagline}
               </p>
               <span
                 className="text-xs tracking-[0.15em] uppercase transition-colors duration-150 flex items-center gap-2"

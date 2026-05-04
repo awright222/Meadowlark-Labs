@@ -76,12 +76,20 @@ export default function Contact() {
               className="text-sm leading-relaxed"
               style={{ color: "var(--muted)" }}
             >
-              Not every project is a fit. If you think yours might be, tell us
+              Not every project is a fit. If you think yours might be, tell me
               what you&rsquo;re working on.
             </p>
           </div>
 
           <div>
+            <p
+              className="text-xs leading-relaxed mb-8"
+              style={{ color: "var(--muted)" }}
+            >
+              I take on a limited number of projects each year. If it&rsquo;s a
+              good fit, I&rsquo;ll get back to you.
+            </p>
+
             {status === "success" ? (
               <div className="py-8">
                 <p
@@ -94,7 +102,7 @@ export default function Contact() {
                   Message received.
                 </p>
                 <p className="text-sm" style={{ color: "var(--muted)" }}>
-                  We&rsquo;ll be in touch if it&rsquo;s a good fit.
+                  I&rsquo;ll be in touch if it&rsquo;s a good fit.
                 </p>
               </div>
             ) : (
