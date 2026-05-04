@@ -29,8 +29,8 @@ const products = [
 
 export default function Products() {
   return (
-    <section id="work" className="px-6 py-32">
-      <div className="max-w-6xl mx-auto">
+    <section id="work" className="py-32">
+      <div className="max-w-7xl mx-auto px-6">
         {/* Section label */}
         <div className="flex items-center gap-4 mb-16">
           <div

@@ -3,10 +3,10 @@
 export default function Hero() {
   return (
     <section
-      className="min-h-screen flex flex-col justify-center px-6"
+      className="min-h-screen flex flex-col justify-center"
       style={{ paddingTop: "var(--navbar-h)" }}
     >
-      <div className="max-w-6xl mx-auto w-full py-32">
+      <div className="max-w-7xl mx-auto w-full py-32 px-6">
         <p
           className="text-xs tracking-[0.2em] uppercase mb-8"
           style={{ color: "var(--accent)" }}

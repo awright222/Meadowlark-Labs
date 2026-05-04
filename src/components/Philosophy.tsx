@@ -1,7 +1,7 @@
 export default function Philosophy() {
   return (
-    <section className="px-6 py-32 border-t" style={{ borderColor: "var(--border)" }}>
-      <div className="max-w-6xl mx-auto">
+    <section className="py-32 border-t" style={{ borderColor: "var(--border)" }}>
+      <div className="max-w-7xl mx-auto px-6">
         <div className="max-w-xl">
           <div className="flex items-center gap-4 mb-16">
             <div className="w-8 h-px" style={{ backgroundColor: "var(--border)" }} />

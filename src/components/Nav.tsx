@@ -16,15 +16,15 @@ export default function Nav() {
         backgroundColor: "var(--background)",
       }}
     >
-      <div className="max-w-6xl mx-auto px-6 h-full flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-6 h-full flex items-center justify-between">
         {/* Wordmark */}
         <Link href="/" className="flex items-center gap-3 group">
           <Image
             src="/logo.png"
             alt="Meadowlark Labs"
-            width={32}
-            height={32}
-            className="object-contain"
+            width={40}
+            height={40}
+            className="object-contain brightness-0 invert"
           />
           <span
             className="text-sm font-medium tracking-wide"

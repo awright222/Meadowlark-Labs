@@ -45,10 +45,10 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="px-6 py-32 border-t"
+      className="py-32 border-t"
       style={{ borderColor: "var(--border)" }}
     >
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-7xl mx-auto px-6">
         <div className="flex items-center gap-4 mb-16">
           <div className="w-8 h-px" style={{ backgroundColor: "var(--border)" }} />
           <span
