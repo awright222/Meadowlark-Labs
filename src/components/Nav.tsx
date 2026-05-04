@@ -22,8 +22,8 @@ export default function Nav() {
           <Image
             src="/logowhite.png"
             alt="Meadowlark Labs"
-            width={52}
-            height={52}
+            width={64}
+            height={64}
             className="object-contain"
           />
           <span

@@ -17,7 +17,6 @@ const cormorant = Cormorant_Garamond({
 
 export const metadata: Metadata = {
   title: "Meadowlark Labs",
-  icons: { icon: "/logowhite.png" },
   description:
     "Meadowlark Labs is a small product studio. We ship focused web applications and take on a handful of client projects each year.",
   openGraph: {
