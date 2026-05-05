@@ -14,7 +14,7 @@ export default function SelectWork() {
             className="text-xs tracking-[0.2em] uppercase"
             style={{ color: "var(--muted)" }}
           >
-            Occasional collaborations
+            Ground Up
           </span>
         </div>
 
@@ -26,18 +26,19 @@ export default function SelectWork() {
               color: "var(--foreground)",
             }}
           >
-            Sometimes I help
+            I help founders
             <br />
-            outside teams.
+            build from scratch.
           </h2>
           <p
             className="text-sm leading-relaxed max-w-lg"
             style={{ color: "var(--muted)" }}
           >
-            A small number of times each year, I work directly with founders or
-            teams on web problems worth solving — broken sites, slow stores,
-            structural issues that are costing real money. It has to be the right
-            problem and the right person. If it is, I move fast.
+            A few times a year I work directly with founders and teams to bring
+            an idea to life — from nothing to a real, working product. Not
+            patching someone else&rsquo;s code. Starting clean, thinking clearly,
+            and building something worth using. It has to be the right idea and
+            the right person. If it is, I move fast.
           </p>
         </div>
       </div>

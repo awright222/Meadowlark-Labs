@@ -10,9 +10,6 @@ export default function Footer() {
         <p className="text-xs" style={{ color: "var(--muted)" }}>
           &copy; {year} Meadowlark Labs LLC
         </p>
-        <p className="text-xs" style={{ color: "var(--muted)" }}>
-          Wyoming
-        </p>
       </div>
     </footer>
   );
