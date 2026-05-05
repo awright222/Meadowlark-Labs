@@ -32,8 +32,8 @@ export default function Hero() {
           className="text-base sm:text-lg max-w-lg leading-relaxed"
           style={{ color: "var(--muted)" }}
         >
-          Meadowlark Labs is a small product studio. We ship focused web
-          applications and occasionally collaborate with outside teams.
+          Meadowlark Labs is where we build and run a set of web applications.
+          Every now and then, we also help bring other ideas to life.
         </p>
 
         <div className="mt-16 flex items-center gap-3">

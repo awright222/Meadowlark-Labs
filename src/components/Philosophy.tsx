@@ -20,16 +20,17 @@ export default function Philosophy() {
               color: "var(--foreground)",
             }}
           >
-            We don&rsquo;t take on everything. We take on the right things.
-            Small team, direct communication, no overhead.
+            Most of our time is spent building our own products.
           </p>
 
           <p
             className="text-sm leading-relaxed mt-8"
             style={{ color: "var(--muted)" }}
           >
-            Every product we ship is something we built because it solved a real
-            problem. When we work with clients, that same standard applies.
+            Occasionally we&rsquo;ll work with someone to fix something that&rsquo;s
+            broken, improve an existing site, or build an idea from the ground up.
+            We&rsquo;re not an agency — just builders who like working on things
+            that are useful and well thought out.
           </p>
         </div>
       </div>

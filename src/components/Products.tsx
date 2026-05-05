@@ -3,25 +3,25 @@
 const products = [
   {
     name: "DealForge",
-    tagline: "Analyze real estate and business deals in minutes.",
+    tagline: "Analyze real estate and business deals in minutes",
     status: "Live",
     href: "https://dealforgehq.com",
   },
   {
     name: "BuildGrade",
-    tagline: "Estimate construction costs with realistic inputs.",
+    tagline: "Estimate construction costs with realistic inputs",
     status: "Live",
     href: "https://buildgrade.io",
   },
   {
     name: "YardCalc",
-    tagline: "Fast material calculators for outdoor projects.",
+    tagline: "Simple material calculators for outdoor projects",
     status: "Live",
     href: "https://yardcalc.app",
   },
   {
     name: "OppMap",
-    tagline: "Screen real estate opportunities by market signals.",
+    tagline: "Screen real estate opportunities by market signals",
     status: "Live",
     href: "https://oppmap.io",
   },
@@ -52,7 +52,7 @@ export default function Products() {
             color: "var(--foreground)",
           }}
         >
-          What we&rsquo;ve built
+          Products
         </h2>
 
         {/* 2x2 grid */}

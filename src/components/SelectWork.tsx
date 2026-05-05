@@ -26,19 +26,19 @@ export default function SelectWork() {
               color: "var(--foreground)",
             }}
           >
-            I help founders
+            Building from
             <br />
-            build from scratch.
+            scratch.
           </h2>
           <p
             className="text-sm leading-relaxed max-w-lg"
             style={{ color: "var(--muted)" }}
           >
-            A few times a year I work directly with founders and teams to bring
-            an idea to life — from nothing to a real, working product. Not
-            patching someone else&rsquo;s code. Starting clean, thinking clearly,
-            and building something worth using. It has to be the right idea and
-            the right person. If it is, I move fast.
+            The projects we enjoy most are the ones that start simple — an idea,
+            a rough direction, and room to think through it properly. That might
+            mean rebuilding something that isn&rsquo;t working, or starting fresh
+            and getting it right from the beginning. Either way, the goal is the
+            same: build something clean, useful, and actually worth using.
           </p>
         </div>
       </div>
