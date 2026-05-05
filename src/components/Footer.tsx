@@ -1,3 +1,5 @@
+"use client";
+
 export default function Footer() {
   const year = new Date().getFullYear();
 
@@ -10,6 +12,26 @@ export default function Footer() {
         <p className="text-xs" style={{ color: "var(--muted)" }}>
           &copy; {year} Meadowlark Labs LLC
         </p>
+        <div className="flex items-center gap-6">
+          <a
+            href="/privacy"
+            className="text-xs transition-colors duration-150"
+            style={{ color: "var(--muted)" }}
+            onMouseEnter={(e) => (e.currentTarget.style.color = "var(--foreground)")}
+            onMouseLeave={(e) => (e.currentTarget.style.color = "var(--muted)")}
+          >
+            Privacy
+          </a>
+          <a
+            href="/terms"
+            className="text-xs transition-colors duration-150"
+            style={{ color: "var(--muted)" }}
+            onMouseEnter={(e) => (e.currentTarget.style.color = "var(--foreground)")}
+            onMouseLeave={(e) => (e.currentTarget.style.color = "var(--muted)")}
+          >
+            Terms
+          </a>
+        </div>
       </div>
     </footer>
   );
