@@ -22,7 +22,7 @@ const products = [
   {
     name: "OppMap",
     tagline: "Screen real estate opportunities by market signals.",
-    status: "Beta",
+    status: "Live",
     href: "https://oppmap.io",
   },
 ];
