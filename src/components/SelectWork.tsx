@@ -34,11 +34,11 @@ export default function SelectWork() {
             className="text-sm leading-relaxed max-w-lg"
             style={{ color: "var(--muted)" }}
           >
-            The projects we enjoy most are the ones that start simple — an idea,
-            a rough direction, and room to think through it properly. That might
-            mean rebuilding something that isn&rsquo;t working, or starting fresh
-            and getting it right from the beginning. Either way, the goal is the
-            same: build something clean, useful, and actually worth using.
+            The projects I enjoy most start simple — an idea, a rough direction,
+            and room to think through it properly. That might mean rebuilding
+            something that isn&rsquo;t working, or starting fresh and getting it
+            right from the beginning. The goal is always the same: build something
+            clean, useful, and actually worth using.
           </p>
         </div>
       </div>

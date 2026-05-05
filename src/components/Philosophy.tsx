@@ -9,7 +9,7 @@ export default function Philosophy() {
               className="text-xs tracking-[0.2em] uppercase"
               style={{ color: "var(--muted)" }}
             >
-              How we work
+              How I work
             </span>
           </div>
 
@@ -20,16 +20,16 @@ export default function Philosophy() {
               color: "var(--foreground)",
             }}
           >
-            Most of our time is spent building our own products.
+            Most of my time is spent building my own products.
           </p>
 
           <p
             className="text-sm leading-relaxed mt-8"
             style={{ color: "var(--muted)" }}
           >
-            Occasionally we&rsquo;ll work with someone to fix something that&rsquo;s
+            Occasionally, I&rsquo;ll work with someone to fix something that&rsquo;s
             broken, improve an existing site, or build an idea from the ground up.
-            We&rsquo;re not an agency — just builders who like working on things
+            I&rsquo;m not an agency — just a builder who likes working on things
             that are useful and well thought out.
           </p>
         </div>

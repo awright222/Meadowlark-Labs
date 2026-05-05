@@ -76,7 +76,7 @@ export default function Contact() {
               className="text-sm leading-relaxed"
               style={{ color: "var(--muted)" }}
             >
-              If you&rsquo;re working on something and think we might be able to
+              If you&rsquo;re working on something and think I might be able to
               help, feel free to reach out.
             </p>
           </div>
@@ -86,7 +86,7 @@ export default function Contact() {
               className="text-xs leading-relaxed mb-8"
               style={{ color: "var(--muted)" }}
             >
-              We don&rsquo;t take on a ton of outside work, but we&rsquo;re
+              I don&rsquo;t take on a lot of outside work, but I&rsquo;m
               always open to a good project.
             </p>
 

@@ -21,9 +21,9 @@ export default function Hero() {
             color: "var(--foreground)",
           }}
         >
-          We build tools
+          Software for
           <br />
-          for real-world
+          real-world
           <br />
           decisions.
         </h1>
