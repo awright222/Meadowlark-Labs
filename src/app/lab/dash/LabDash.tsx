@@ -3,13 +3,14 @@
 import { useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
 
-type TabId = "buildgrade" | "yardcalc" | "oppmap";
+type TabId = "buildgrade" | "yardcalc" | "oppmap" | "dealforge";
 
 interface Configured {
   vercel: boolean;
   buildgrade: boolean;
   yardcalc: boolean;
   oppmap: boolean;
+  dealforge: boolean;
 }
 
 interface AnalyticsData {
@@ -26,9 +27,10 @@ interface AnalyticsData {
 }
 
 const TABS: { id: TabId; label: string; url: string }[] = [
-  { id: "buildgrade", label: "BuildGrade", url: "https://buildgrade.app" },
-  { id: "yardcalc", label: "YardCalc", url: "https://yardcalc.app" },
-  { id: "oppmap", label: "OppMap", url: "https://oppmap.app" },
+  { id: "buildgrade", label: "BuildGrade", url: "https://www.usebuildgrade.com" },
+  { id: "yardcalc", label: "YardCalc", url: "https://yardcalcapp.com" },
+  { id: "dealforge", label: "DealForge", url: "https://dealforgehq.com" },
+  { id: "oppmap", label: "OppMap", url: "https://www.oppmap.com" },
 ];
 
 export default function LabDash({ configured }: { configured: Configured }) {

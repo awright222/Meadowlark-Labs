@@ -19,6 +19,7 @@ export default async function DashPage() {
     buildgrade: !!process.env.BUILDGRADE_PROJECT_ID,
     yardcalc: !!process.env.YARDCALC_PROJECT_ID,
     oppmap: !!process.env.OPPMAP_PROJECT_ID,
+    dealforge: !!process.env.DEALFORGE_PROJECT_ID,
   };
 
   return <LabDash configured={configured} />;
