@@ -13,6 +13,240 @@ interface Configured {
   dealforge: boolean;
 }
 
+interface Deployment {
+  uid: string;
+  url: string;
+  state: string;
+  created: number;
+  name: string;
+}
+
+interface DeployData {
+  configured: boolean;
+  deployments?: Deployment[];
+  error?: string;
+}
+
+const TABS: { id: TabId; label: string; url: string; analyticsSlug: string }[] = [
+  { id: "buildgrade", label: "BuildGrade", url: "https://www.usebuildgrade.com", analyticsSlug: "buildgrade" },
+  { id: "yardcalc",   label: "YardCalc",   url: "https://yardcalcapp.com",       analyticsSlug: "yardcalc" },
+  { id: "dealforge",  label: "DealForge",  url: "https://dealforgehq.com",        analyticsSlug: "dealforge" },
+  { id: "oppmap",     label: "OppMap",     url: "https://www.oppmap.com",         analyticsSlug: "oppmap" },
+];
+
+const VERCEL_SLUG = process.env.NEXT_PUBLIC_VERCEL_TEAM_SLUG ?? "";
+
+function analyticsUrl(slug: string) {
+  return VERCEL_SLUG
+    ? `https://vercel.com/${VERCEL_SLUG}/${slug}/analytics`
+    : "https://vercel.com/dashboard";
+}
+
+export default function LabDash({ configured }: { configured: Configured }) {
+  const router = useRouter();
+  const [tab, setTab] = useState<TabId>("buildgrade");
+  const [deploys, setDeploys] = useState<Partial<Record<TabId, DeployData>>>({});
+  const [loading, setLoading] = useState<Partial<Record<TabId, boolean>>>({});
+
+  const fetchDeploys = useCallback(
+    async (project: TabId) => {
+      if (deploys[project] || loading[project]) return;
+      setLoading((prev) => ({ ...prev, [project]: true }));
+      try {
+        const res = await fetch(`/api/lab/analytics?project=${project}`);
+        const data: DeployData = await res.json();
+        setDeploys((prev) => ({ ...prev, [project]: data }));
+      } catch {
+        setDeploys((prev) => ({
+          ...prev,
+          [project]: { configured: false, error: "Fetch failed." },
+        }));
+      } finally {
+        setLoading((prev) => ({ ...prev, [project]: false }));
+      }
+    },
+    [deploys, loading]
+  );
+
+  useEffect(() => {
+    if (!deploys[tab] && !loading[tab]) fetchDeploys(tab);
+  }, [tab, deploys, loading, fetchDeploys]);
+
+  async function handleLogout() {
+    await fetch("/api/lab/auth", { method: "DELETE" });
+    router.push("/lab");
+  }
+
+  function handleRefresh() {
+    setDeploys((prev) => {
+      const next = { ...prev };
+      delete next[tab];
+      return next;
+    });
+  }
+
+  const data = deploys[tab];
+  const isLoading = loading[tab];
+  const currentTab = TABS.find((t) => t.id === tab)!;
+
+  return (
+    <div className="min-h-screen bg-background text-foreground">
+      {/* Header */}
+      <header className="border-b border-border px-6 py-4 flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <span className="text-accent font-display text-xl tracking-widest">ML</span>
+          <span className="text-muted text-xs tracking-[0.2em] uppercase">Lab</span>
+        </div>
+        <button
+          onClick={handleLogout}
+          className="text-muted text-xs hover:text-foreground transition-colors"
+        >
+          Sign out
+        </button>
+      </header>
+
+      {/* Tabs */}
+      <nav className="border-b border-border px-6 flex">
+        {TABS.map((t) => (
+          <button
+            key={t.id}
+            onClick={() => setTab(t.id)}
+            className={`px-5 py-3 text-sm border-b-2 -mb-px transition-colors ${
+              tab === t.id
+                ? "border-accent text-foreground"
+                : "border-transparent text-muted hover:text-foreground"
+            }`}
+          >
+            {t.label}
+          </button>
+        ))}
+      </nav>
+
+      {/* Content */}
+      <main className="px-6 py-8 max-w-4xl mx-auto space-y-8">
+        {/* Deployments */}
+        {configured.vercel && (
+          <section className="space-y-4">
+            <div className="flex items-center justify-between">
+              <h2 className="text-xs text-muted uppercase tracking-widest">
+                Recent Deployments
+              </h2>
+              <button
+                onClick={handleRefresh}
+                className="text-xs text-muted hover:text-foreground transition-colors"
+              >
+                Refresh
+              </button>
+            </div>
+
+            {isLoading && <LoadingSkeleton />}
+            {!isLoading && data?.error && (
+              <p className="text-sm text-red-400">{data.error}</p>
+            )}
+            {!isLoading && data?.configured && (
+              <DeploymentList deployments={data.deployments ?? []} />
+            )}
+          </section>
+        )}
+
+        {/* Links */}
+        <section className="flex gap-3 flex-wrap">
+          <a
+            href={currentTab.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-xs border border-border rounded px-3 py-2 text-muted hover:text-foreground hover:border-foreground/30 transition-colors"
+          >
+            Open {currentTab.label} ↗
+          </a>
+          <a
+            href={analyticsUrl(currentTab.analyticsSlug)}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-xs border border-border rounded px-3 py-2 text-muted hover:text-foreground hover:border-foreground/30 transition-colors"
+          >
+            Vercel Analytics ↗
+          </a>
+          <a
+            href="https://vercel.com/dashboard"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-xs border border-border rounded px-3 py-2 text-muted hover:text-foreground hover:border-foreground/30 transition-colors"
+          >
+            Vercel Dashboard ↗
+          </a>
+        </section>
+      </main>
+    </div>
+  );
+}
+
+const STATE_STYLES: Record<string, string> = {
+  READY:   "text-green-400",
+  ERROR:   "text-red-400",
+  BUILDING:"text-yellow-400",
+  QUEUED:  "text-muted",
+  CANCELED:"text-muted",
+};
+
+function DeploymentList({ deployments }: { deployments: Deployment[] }) {
+  if (deployments.length === 0) {
+    return <p className="text-sm text-muted">No production deployments found.</p>;
+  }
+  return (
+    <div className="bg-surface border border-border rounded-lg overflow-hidden">
+      <div className="divide-y divide-border">
+        {deployments.map((d) => (
+          <div key={d.uid} className="px-4 py-3 flex items-center justify-between gap-4">
+            <div className="flex items-center gap-3 min-w-0">
+              <span className={`text-xs font-medium ${STATE_STYLES[d.state] ?? "text-muted"}`}>
+                {d.state}
+              </span>
+              <a
+                href={`https://${d.url}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm text-foreground hover:text-accent transition-colors truncate"
+              >
+                {d.url}
+              </a>
+            </div>
+            <span className="text-xs text-muted tabular-nums shrink-0">
+              {new Date(d.created).toLocaleDateString("en-US", {
+                month: "short",
+                day: "numeric",
+                hour: "2-digit",
+                minute: "2-digit",
+              })}
+            </span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function LoadingSkeleton() {
+  return (
+    <div className="bg-surface border border-border rounded-lg overflow-hidden divide-y divide-border">
+      {[0, 1, 2].map((i) => (
+        <div key={i} className="px-4 py-3 h-12 animate-pulse" />
+      ))}
+    </div>
+  );
+}
+
+
+type TabId = "buildgrade" | "yardcalc" | "oppmap" | "dealforge";
+
+interface Configured {
+  vercel: boolean;
+  buildgrade: boolean;
+  yardcalc: boolean;
+  oppmap: boolean;
+  dealforge: boolean;
+}
+
 interface AnalyticsData {
   configured: boolean;
   summary?: {
