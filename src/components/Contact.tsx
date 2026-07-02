@@ -68,16 +68,22 @@ export default function Contact() {
                 color: "var(--foreground)",
               }}
             >
-              Get in
-              <br />
-              touch.
+              Let&rsquo;s talk.
             </h2>
+            <p
+              className="text-sm leading-relaxed mb-4"
+              style={{ color: "var(--muted)" }}
+            >
+              If you&rsquo;re building something and think I might be able to
+              help, I&rsquo;d love to hear about it.
+            </p>
             <p
               className="text-sm leading-relaxed"
               style={{ color: "var(--muted)" }}
             >
-              If you&rsquo;re working on something and think I might be able to
-              help, feel free to reach out.
+              I intentionally keep my client work limited so I can focus on my
+              own products, but I&rsquo;m always interested in thoughtful
+              projects and good people.
             </p>
           </div>
 
@@ -86,8 +92,8 @@ export default function Contact() {
               className="text-xs leading-relaxed mb-8"
               style={{ color: "var(--muted)" }}
             >
-              I don&rsquo;t take on a lot of outside work, but I&rsquo;m
-              always open to a good project.
+              I only take on a handful of client projects each year—reach out
+              before I&rsquo;m booked.
             </p>
 
             {status === "success" ? (
@@ -102,7 +108,7 @@ export default function Contact() {
                   Message received.
                 </p>
                 <p className="text-sm" style={{ color: "var(--muted)" }}>
-                  We&rsquo;ll be in touch.
+                  I&rsquo;ll be in touch.
                 </p>
               </div>
             ) : (

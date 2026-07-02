@@ -29,11 +29,20 @@ export default function Hero() {
         </h1>
 
         <p
+          className="text-base sm:text-lg max-w-lg leading-relaxed mb-6"
+          style={{ color: "var(--muted)" }}
+        >
+          I build software that turns complicated decisions into
+          straightforward ones.
+        </p>
+
+        <p
           className="text-base sm:text-lg max-w-lg leading-relaxed"
           style={{ color: "var(--muted)" }}
         >
-          Meadowlark Labs is where we build and run a set of web applications.
-          Every now and then, we also help bring other ideas to life.
+          Most of my time is spent building products through Meadowlark Labs.
+          Occasionally, I partner with businesses to design and build custom
+          software, websites, and tools.
         </p>
 
         <div className="mt-16 flex items-center gap-3">
@@ -52,7 +61,7 @@ export default function Hero() {
               (e.currentTarget.style.color = "var(--muted)")
             }
           >
-            View work
+            View My Work
           </a>
         </div>
       </div>

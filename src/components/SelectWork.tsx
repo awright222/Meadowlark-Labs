@@ -26,19 +26,25 @@ export default function SelectWork() {
               color: "var(--foreground)",
             }}
           >
-            Building from
+            From idea to
             <br />
-            scratch.
+            production.
           </h2>
+          <p
+            className="text-sm leading-relaxed max-w-lg mb-5"
+            style={{ color: "var(--muted)" }}
+          >
+            Some projects need a few thoughtful improvements. Others are better
+            rebuilt from the ground up.
+          </p>
           <p
             className="text-sm leading-relaxed max-w-lg"
             style={{ color: "var(--muted)" }}
           >
-            The projects I enjoy most start simple — an idea, a rough direction,
-            and room to think through it properly. That might mean rebuilding
-            something that isn&rsquo;t working, or starting fresh and getting it
-            right from the beginning. The goal is always the same: build something
-            clean, useful, and actually worth using.
+            I enjoy taking an idea from an early conversation through design,
+            development, deployment, and long-term iteration. The goal
+            isn&rsquo;t simply to launch software—it&rsquo;s to build something
+            reliable, intuitive, and worth coming back to.
           </p>
         </div>
       </div>

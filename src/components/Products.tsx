@@ -3,25 +3,25 @@
 const products = [
   {
     name: "DealForge",
-    tagline: "Analyze real estate and business deals in minutes",
+    tagline: "Analyze real estate and business investments with professional-grade underwriting tools.",
     status: "Live",
     href: "https://dealforgehq.com",
   },
   {
     name: "BuildGrade",
-    tagline: "Estimate construction costs with realistic inputs",
+    tagline: "Construction cost calculators and planning tools for homeowners, builders, and developers.",
     status: "Live",
     href: "https://buildgrade.io",
   },
   {
     name: "YardCalc",
-    tagline: "Simple material calculators for outdoor projects",
+    tagline: "Material calculators and practical guides for landscaping and outdoor projects.",
     status: "Live",
     href: "https://yardcalc.app",
   },
   {
     name: "OppMap",
-    tagline: "Screen real estate opportunities by market signals",
+    tagline: "Research market opportunities using infrastructure, growth, and demographic signals.",
     status: "Live",
     href: "https://oppmap.io",
   },
