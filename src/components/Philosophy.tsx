@@ -50,7 +50,7 @@ export default function Philosophy() {
 
           <ul className="flex flex-col gap-2">
             {[
-              "Shopify stores & customizations",
+              "Shopify, WordPress & CMS customizations",
               "Next.js & React applications",
               "Internal business tools",
               "Calculators and interactive web tools",
