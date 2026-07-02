@@ -32,8 +32,7 @@ export default function Hero() {
           className="text-base sm:text-lg max-w-lg leading-relaxed mb-6"
           style={{ color: "var(--muted)" }}
         >
-          I build software that turns complicated decisions into
-          straightforward ones.
+          I build practical software for people making important decisions.
         </p>
 
         <p
@@ -41,7 +40,7 @@ export default function Hero() {
           style={{ color: "var(--muted)" }}
         >
           Most of my time is spent building products through Meadowlark Labs.
-          Occasionally, I partner with businesses to design and build custom
+          Alongside that, I partner with businesses to design and build custom
           software, websites, and tools.
         </p>
 

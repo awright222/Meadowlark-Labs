@@ -42,9 +42,9 @@ export default function SelectWork() {
             style={{ color: "var(--muted)" }}
           >
             I enjoy taking an idea from an early conversation through design,
-            development, deployment, and long-term iteration. The goal
-            isn&rsquo;t simply to launch software—it&rsquo;s to build something
-            reliable, intuitive, and worth coming back to.
+            development, deployment, and ongoing improvements. The goal
+            isn&rsquo;t just to launch software—it&rsquo;s to build something
+            that&rsquo;s dependable, easy to maintain, and genuinely useful.
           </p>
         </div>
       </div>

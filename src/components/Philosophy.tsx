@@ -50,11 +50,11 @@ export default function Philosophy() {
 
           <ul className="flex flex-col gap-2">
             {[
+              "SaaS products & MVPs",
               "Shopify, WordPress & CMS customizations",
               "Next.js & React applications",
               "Internal business tools",
-              "Calculators and interactive web tools",
-              "SaaS products & MVPs",
+              "Calculators & interactive web tools",
             ].map((item) => (
               <li key={item} className="flex items-center gap-3 text-sm" style={{ color: "var(--muted)" }}>
                 <div className="w-4 h-px flex-shrink-0" style={{ backgroundColor: "var(--border)" }} />

@@ -82,8 +82,8 @@ export default function Contact() {
               style={{ color: "var(--muted)" }}
             >
               I intentionally keep my client work limited so I can focus on my
-              own products, but I&rsquo;m always interested in thoughtful
-              projects and good people.
+              own products, but I&rsquo;m always interested in projects that
+              are a good fit.
             </p>
           </div>
 
