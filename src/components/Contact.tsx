@@ -78,12 +78,18 @@ export default function Contact() {
               help, I&rsquo;d love to hear about it.
             </p>
             <p
-              className="text-sm leading-relaxed"
+              className="text-sm leading-relaxed mb-4"
               style={{ color: "var(--muted)" }}
             >
               I intentionally keep my client work limited so I can focus on my
               own products, but I&rsquo;m always interested in projects that
               are a good fit.
+            </p>
+            <p
+              className="text-xs"
+              style={{ color: "var(--border)" }}
+            >
+              Usually reply within 1&ndash;2 business days.
             </p>
           </div>
 

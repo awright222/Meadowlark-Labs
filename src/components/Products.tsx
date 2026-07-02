@@ -1,5 +1,16 @@
 "use client";
 
+import { motion } from "framer-motion";
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 20 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] as [number, number, number, number], delay: i * 0.08 },
+  }),
+};
+
 const products = [
   {
     name: "DealForge",
@@ -32,7 +43,13 @@ export default function Products() {
     <section id="work" className="py-32">
       <div className="max-w-7xl mx-auto px-6">
         {/* Section label */}
-        <div className="flex items-center gap-4 mb-16">
+        <motion.div
+          className="flex items-center gap-4 mb-16"
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
+        >
           <div
             className="w-8 h-px"
             style={{ backgroundColor: "var(--border)" }}
@@ -41,38 +58,42 @@ export default function Products() {
             className="text-xs tracking-[0.2em] uppercase"
             style={{ color: "var(--muted)" }}
           >
-            What I&rsquo;m Building
+            Products
           </span>
-        </div>
+        </motion.div>
 
-        <h2
+        <motion.h2
           className="text-4xl sm:text-5xl font-light mb-16"
           style={{
             fontFamily: "var(--font-cormorant)",
             color: "var(--foreground)",
           }}
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] as [number, number, number, number], delay: 0.05 }}
         >
-          What I&rsquo;m Building
-        </h2>
+          Products
+        </motion.h2>
 
         {/* 2x2 grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-px"
           style={{ backgroundColor: "var(--border)" }}
         >
-          {products.map((p) => (
-            <a
+          {products.map((p, i) => (
+            <motion.a
               key={p.name}
               href={p.href}
               target="_blank"
               rel="noopener noreferrer"
               className="group block p-8 transition-colors duration-200"
               style={{ backgroundColor: "var(--background)" }}
-              onMouseEnter={(e) =>
-                (e.currentTarget.style.backgroundColor = "var(--surface)")
-              }
-              onMouseLeave={(e) =>
-                (e.currentTarget.style.backgroundColor = "var(--background)")
-              }
+              custom={i}
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              whileHover={{ y: -2, backgroundColor: "var(--surface)" }}
+              viewport={{ once: true }}
             >
               <div className="flex items-start justify-between mb-4">
                 <h3
@@ -124,7 +145,7 @@ export default function Products() {
                   />
                 </svg>
               </span>
-            </a>
+            </motion.a>
           ))}
         </div>
       </div>
