@@ -41,7 +41,7 @@ export default function Products() {
             className="text-xs tracking-[0.2em] uppercase"
             style={{ color: "var(--muted)" }}
           >
-            Products
+            What I&rsquo;m Building
           </span>
         </div>
 
@@ -52,7 +52,7 @@ export default function Products() {
             color: "var(--foreground)",
           }}
         >
-          Products
+          What I&rsquo;m Building
         </h2>
 
         {/* 2x2 grid */}
