@@ -43,13 +43,21 @@ export default function About() {
               I&rsquo;m Alex Wright, founder of Meadowlark Labs.
             </motion.p>
             <motion.p
-              className="text-sm leading-relaxed"
+              className="text-sm leading-relaxed mb-5"
               style={{ color: "var(--muted)" }}
               {...inView(0.16)}
             >
-              Before building software full time, I worked in real estate, where
-              I saw firsthand how often important decisions were made with
-              incomplete information or clunky tools. Today I build products
+              Before building software full time, I spent six years in real
+              estate. I saw firsthand how often important decisions were made
+              with incomplete information, spreadsheets, and disconnected tools.
+            </motion.p>
+            <motion.p
+              className="text-sm leading-relaxed"
+              style={{ color: "var(--muted)" }}
+              {...inView(0.22)}
+            >
+              That experience eventually led me to teach myself software
+              development and start Meadowlark Labs, where I build products
               that make those decisions a little clearer.
             </motion.p>
           </div>
