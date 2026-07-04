@@ -71,7 +71,7 @@ export default function About() {
             transition={{ duration: 0.8, ease: "easeOut", delay: 0.1 }}
           >
             <Image
-              src="/AlexWright.png"
+              src="/AlexWright.jpg"
               alt="Alex Wright"
               fill
               className="object-cover object-top"
