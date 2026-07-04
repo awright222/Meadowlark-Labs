@@ -16,14 +16,14 @@ const cormorant = Cormorant_Garamond({
 });
 
 export const metadata: Metadata = {
-  title: "Meadowlark Labs",
+  title: "Meadowlark Labs — Alex Wright, Freelance Software Developer",
   verification: { google: "H2e_Ip5ozeSd72uGz7BVE1T6v5FZld-XPp5OVqHpQqw" },
   description:
-    "Meadowlark Labs is a small product studio. We ship focused web applications and take on a handful of client projects each year.",
+    "Alex Wright is a freelance software developer and founder of Meadowlark Labs. He builds custom web applications, internal tools, and client software for businesses.",
   openGraph: {
-    title: "Meadowlark Labs",
+    title: "Meadowlark Labs — Alex Wright, Freelance Software Developer",
     description:
-      "Meadowlark Labs is a small product studio. We ship focused web applications and take on a handful of client projects each year.",
+      "Alex Wright is a freelance software developer and founder of Meadowlark Labs. He builds custom web applications, internal tools, and client software for businesses.",
     url: "https://meadowlark-labs.com",
     siteName: "Meadowlark Labs",
     locale: "en_US",
@@ -38,7 +38,40 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.variable} ${cormorant.variable}`}>
-      <body className="antialiased">{children}</body>
+      <body className="antialiased">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Person",
+              name: "Alex Wright",
+              url: "https://meadowlark-labs.com",
+              jobTitle: "Freelance Software Developer",
+              worksFor: {
+                "@type": "Organization",
+                name: "Meadowlark Labs",
+                url: "https://meadowlark-labs.com",
+              },
+              description:
+                "Alex Wright is a freelance software developer who builds custom web applications, internal tools, and client software for businesses.",
+              knowsAbout: [
+                "Web Development",
+                "Software Development",
+                "Custom Web Applications",
+                "Internal Tools",
+              ],
+              address: {
+                "@type": "PostalAddress",
+                addressLocality: "Cody",
+                addressRegion: "WY",
+                addressCountry: "US",
+              },
+            }),
+          }}
+        />
+        {children}
+      </body>
     </html>
   );
 }
