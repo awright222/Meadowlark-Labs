@@ -43,11 +43,11 @@ export default function Hero() {
             }}
             {...fadeUp(0.2)}
           >
-            Software for
+            Software built
             <br />
-            real-world
+            to solve
             <br />
-            decisions.
+            real problems.
           </motion.h1>
 
           <motion.p
@@ -55,7 +55,7 @@ export default function Hero() {
             style={{ color: "var(--muted)" }}
             {...fadeUp(0.35)}
           >
-            I build practical software for people making important decisions.
+            Through Meadowlark Labs, I build software products and occasionally partner with businesses to create websites, applications, and internal tools.
           </motion.p>
 
           <motion.p
@@ -63,9 +63,7 @@ export default function Hero() {
             style={{ color: "var(--muted)" }}
             {...fadeUp(0.42)}
           >
-            Most of my time is spent building products through Meadowlark Labs.
-            Alongside that, I partner with businesses to design and build custom
-            software, websites, and tools.
+            Whether it&rsquo;s a customer-facing product or software behind the scenes, my goal is the same: build something dependable, intuitive, and genuinely useful.
           </motion.p>
 
           <motion.div className="mt-16 flex items-center gap-3" {...fadeUp(0.5)}>

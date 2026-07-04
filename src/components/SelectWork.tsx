@@ -38,28 +38,21 @@ export default function SelectWork() {
             }}
             {...inView(0.08)}
           >
-            From idea to
+            From problem
             <br />
-            production.
+            to product.
           </motion.h2>
           <motion.p
             className="text-sm leading-relaxed max-w-lg mb-5"
             style={{ color: "var(--muted)" }}
             {...inView(0.14)}
           >
-            Some projects need a few thoughtful improvements. Others are better
-            rebuilt from the ground up.
+            Some projects need thoughtful improvements. Others are better
+            rebuilt from the ground up. Either way, my focus is the same:
+            understand the problem, keep the solution simple, and build
+            something that&rsquo;s dependable long after launch.
           </motion.p>
-          <motion.p
-            className="text-sm leading-relaxed max-w-lg"
-            style={{ color: "var(--muted)" }}
-            {...inView(0.2)}
-          >
-            I enjoy taking an idea from an early conversation through design,
-            development, deployment, and ongoing improvements. The goal
-            isn&rsquo;t just to launch software—it&rsquo;s to build something
-            that&rsquo;s dependable, easy to maintain, and genuinely useful.
-          </motion.p>
+
         </div>
       </div>
     </section>

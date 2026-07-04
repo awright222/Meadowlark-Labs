@@ -49,10 +49,11 @@ export default function Philosophy() {
             style={{ color: "var(--muted)" }}
             {...inView(0.18)}
           >
-            The best projects usually start with a real problem&mdash;not just a
-            request for a website. Whether it&rsquo;s improving an existing
-            product, building a custom application, or building something
-            entirely new, I enjoy figuring out the simplest way to solve it.
+            The projects I enjoy most start with a real problem to solve, not
+            just a request for a new website. Whether it&rsquo;s improving an
+            existing product, building a custom application, or building
+            something entirely new, I enjoy figuring out the simplest way to
+            solve it.
           </motion.p>
 
           <motion.p

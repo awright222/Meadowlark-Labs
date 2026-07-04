@@ -47,18 +47,20 @@ export default function About() {
               style={{ color: "var(--muted)" }}
               {...inView(0.16)}
             >
-              Before building software full time, I spent six years in real
-              estate. I saw firsthand how often important decisions were made
-              with incomplete information, spreadsheets, and disconnected tools.
+              Before writing software, I spent six years in real estate. Every
+              day I watched buyers, investors, and builders make expensive
+              decisions using spreadsheets, scattered information, and gut
+              instinct.
             </motion.p>
             <motion.p
               className="text-sm leading-relaxed"
               style={{ color: "var(--muted)" }}
               {...inView(0.22)}
             >
-              That experience eventually led me to teach myself software
-              development and start Meadowlark Labs, where I build products
-              that make those decisions a little clearer.
+              I started building small tools to answer the questions I kept
+              running into. Those tools eventually grew into Meadowlark
+              Labs&mdash;a collection of software designed to make complex
+              decisions clearer and easier to navigate.
             </motion.p>
           </div>
 
