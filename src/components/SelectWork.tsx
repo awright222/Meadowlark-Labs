@@ -48,9 +48,8 @@ export default function SelectWork() {
             {...inView(0.14)}
           >
             Some projects need thoughtful improvements. Others are better
-            rebuilt from the ground up. Either way, my focus is the same:
-            understand the problem, keep the solution simple, and build
-            something that&rsquo;s dependable long after launch.
+            rebuilt from the ground up. My job is figuring out which approach
+            makes the most sense before writing a line of code.
           </motion.p>
 
         </div>

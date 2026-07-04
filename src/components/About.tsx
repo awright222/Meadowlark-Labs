@@ -59,8 +59,8 @@ export default function About() {
             >
               I started building small tools to answer the questions I kept
               running into. Those tools eventually grew into Meadowlark
-              Labs&mdash;a collection of software designed to make complex
-              decisions clearer and easier to navigate.
+              Labs, where I build software focused on clarity, simplicity,
+              and solving practical problems.
             </motion.p>
           </div>
 
