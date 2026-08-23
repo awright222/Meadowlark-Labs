@@ -22,19 +22,19 @@ const products = [
     name: "BuildGrade",
     tagline: "Construction cost calculators and planning tools for homeowners, builders, and developers.",
     status: "Live",
-    href: "https://buildgrade.io",
+    href: "https://www.usebuildgrade.com/",
   },
   {
     name: "YardCalc",
     tagline: "Material calculators and practical guides for landscaping and outdoor projects.",
     status: "Live",
-    href: "https://yardcalc.app",
+    href: "https://yardcalcapp.com/",
   },
   {
     name: "OppMap",
     tagline: "Research market opportunities using infrastructure, growth, and demographic signals.",
     status: "Live",
-    href: "https://oppmap.io",
+    href: "https://www.oppmap.com/",
   },
 ];
 
