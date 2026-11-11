@@ -81,8 +81,9 @@ export default function Products() {
             Products I&rsquo;ve built.
           </h2>
           <p className="text-base sm:text-lg leading-relaxed text-muted">
-            Four software products I designed and built myself. Each one is
-            live and does real work, so you can open any of them and try it.
+            From investment analysis to construction estimating and market
+            research, these are independent software products I&rsquo;ve
+            designed, built, and launched.
           </p>
         </div>
 
@@ -101,18 +102,9 @@ export default function Products() {
                 </div>
 
                 <div className="flex flex-1 flex-col pt-6">
-                  <div className="flex items-center justify-between gap-4 mb-3">
-                    <p className="text-xs font-medium tracking-[0.15em] uppercase text-accent">
-                      {p.category}
-                    </p>
-                    <p className="flex items-center gap-2 text-xs text-muted">
-                      <span
-                        className="block h-1.5 w-1.5 rounded-full bg-accent"
-                        aria-hidden="true"
-                      />
-                      Live
-                    </p>
-                  </div>
+                  <p className="mb-3 text-xs font-medium tracking-[0.15em] uppercase text-accent">
+                    {p.category}
+                  </p>
 
                   <h3 className="font-display text-3xl sm:text-4xl font-normal leading-tight text-foreground mb-3">
                     {p.name}

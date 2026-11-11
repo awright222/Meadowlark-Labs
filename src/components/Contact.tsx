@@ -45,7 +45,7 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="py-32 border-t"
+      className="py-24 sm:py-32 border-t"
       style={{ borderColor: "var(--border)" }}
     >
       <div className="site-container">
@@ -81,9 +81,10 @@ export default function Contact() {
               className="text-sm leading-relaxed mb-4"
               style={{ color: "var(--muted)" }}
             >
-              I intentionally keep my client work limited so I can focus on my
-              own products, but I&rsquo;m always interested in projects that
-              are a good fit.
+              Client projects are welcome, whether it&rsquo;s a new website, a
+              custom application, or a tool that simplifies part of your
+              business. Tell me what you have in mind and we can talk through
+              how I can help.
             </p>
             <p
               className="text-xs"
@@ -98,8 +99,8 @@ export default function Contact() {
               className="text-xs leading-relaxed mb-8"
               style={{ color: "var(--muted)" }}
             >
-              I only take on a handful of client projects each year—reach out
-              before I&rsquo;m booked.
+              A few sentences is plenty: what you&rsquo;re trying to solve, who
+              it&rsquo;s for, and anything you already have in place.
             </p>
 
             {status === "success" ? (

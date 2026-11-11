@@ -2,8 +2,7 @@ import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
 import Products from "@/components/Products";
-import Philosophy from "@/components/Philosophy";
-import SelectWork from "@/components/SelectWork";
+import Services from "@/components/Services";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 
@@ -16,10 +15,9 @@ export default function Home() {
       <Nav />
       <main id="main" tabIndex={-1} className="outline-none">
         <Hero />
-        <About />
         <Products />
-        <Philosophy />
-        <SelectWork />
+        <Services />
+        <About />
         <Contact />
       </main>
       <Footer />
