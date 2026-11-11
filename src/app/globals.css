@@ -199,6 +199,21 @@ body {
   }
 }
 
+/* One tab stop per product card: the link's ::after covers the whole card.
+   Kept outside @layer so it can override the unlayered global focus outline. */
+.stretched-link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+.stretched-link:focus-visible {
+  outline: none;
+}
+.stretched-link:focus-visible::after {
+  outline: 2px solid var(--ring);
+  outline-offset: 6px;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

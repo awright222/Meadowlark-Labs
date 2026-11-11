@@ -19,8 +19,6 @@ const draw = (delay = 0, duration = 0.9) => ({
   },
 });
 
-const products = ["DealForge", "BuildGrade", "YardCalc", "OppMap"];
-
 function Arrow() {
   return (
     <svg
@@ -93,20 +91,6 @@ export default function Hero() {
             <a href="#work" className="btn btn-secondary btn-lg">
               Explore my work
             </a>
-          </motion.div>
-
-          <motion.div
-            className="mt-14 pt-6 border-t border-border max-w-xl"
-            {...fadeUp(0.5)}
-          >
-            <p className="text-xs tracking-[0.15em] uppercase text-muted mb-3">
-              Products I&rsquo;ve built
-            </p>
-            <ul className="flex flex-wrap gap-x-6 gap-y-2 text-sm font-medium text-foreground">
-              {products.map((name) => (
-                <li key={name}>{name}</li>
-              ))}
-            </ul>
           </motion.div>
         </div>
 
