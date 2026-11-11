@@ -36,11 +36,11 @@ export default function About() {
               className="text-base leading-relaxed text-muted mb-5"
               {...inView(0.16)}
             >
-              Meadowlark Labs is my independent software studio. Before I wrote
-              software, I spent six years in real estate, where I saw how
-              businesses really run. Every day I watched buyers, investors, and
-              builders make expensive decisions using spreadsheets, scattered
-              information, and gut instinct.
+              Before moving into software development, I spent six years in
+              real estate. Working with buyers, investors, and builders showed
+              me how difficult it can be to make informed decisions when
+              information is scattered across spreadsheets and disconnected
+              tools.
             </motion.p>
             <motion.p
               className="text-base leading-relaxed text-muted mb-5"

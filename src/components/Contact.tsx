@@ -74,17 +74,9 @@ export default function Contact() {
               className="text-sm leading-relaxed mb-4"
               style={{ color: "var(--muted)" }}
             >
-              If you&rsquo;re building something and think I might be able to
-              help, I&rsquo;d love to hear about it.
-            </p>
-            <p
-              className="text-sm leading-relaxed mb-4"
-              style={{ color: "var(--muted)" }}
-            >
-              Client projects are welcome, whether it&rsquo;s a new website, a
-              custom application, or a tool that simplifies part of your
-              business. Tell me what you have in mind and we can talk through
-              how I can help.
+              Have a website, application, or business tool in mind? Tell me a
+              little about what you&rsquo;re working on, and we can explore how
+              I might help.
             </p>
             <p
               className="text-xs"
