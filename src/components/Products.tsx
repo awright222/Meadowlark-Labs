@@ -41,7 +41,7 @@ const products = [
 export default function Products() {
   return (
     <section id="work" className="py-32">
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="site-container">
         {/* Section label */}
         <motion.div
           className="flex items-center gap-4 mb-16"
@@ -86,13 +86,12 @@ export default function Products() {
               href={p.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="group block p-8 transition-colors duration-200"
-              style={{ backgroundColor: "var(--background)" }}
+              className="group block p-8 bg-background hover:bg-surface transition-colors duration-200"
               custom={i}
               variants={fadeUp}
               initial="hidden"
               whileInView="visible"
-              whileHover={{ y: -2, backgroundColor: "var(--surface)" }}
+              whileHover={{ y: -2 }}
               viewport={{ once: true }}
             >
               <div className="flex items-start justify-between mb-4">
@@ -108,14 +107,15 @@ export default function Products() {
                 <span
                   className="text-xs tracking-wide px-2 py-1 border mt-1"
                   style={{
-                    color:
-                      p.status === "Live"
-                        ? "var(--accent)"
-                        : "var(--muted)",
+                    color: "var(--foreground)",
                     borderColor:
                       p.status === "Live"
                         ? "var(--accent)"
                         : "var(--border)",
+                    backgroundColor:
+                      p.status === "Live"
+                        ? "var(--accent-soft)"
+                        : "transparent",
                   }}
                 >
                   {p.status}

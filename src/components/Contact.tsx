@@ -48,7 +48,7 @@ export default function Contact() {
       className="py-32 border-t"
       style={{ borderColor: "var(--border)" }}
     >
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="site-container">
         <div className="flex items-center gap-4 mb-16">
           <div className="w-8 h-px" style={{ backgroundColor: "var(--border)" }} />
           <span
@@ -87,7 +87,7 @@ export default function Contact() {
             </p>
             <p
               className="text-xs"
-              style={{ color: "var(--border)" }}
+              style={{ color: "var(--muted)" }}
             >
               Usually reply within 1&ndash;2 business days.
             </p>
@@ -133,17 +133,7 @@ export default function Contact() {
                     type="text"
                     required
                     maxLength={100}
-                    className="w-full bg-transparent border px-4 py-3 text-sm outline-none transition-colors duration-150"
-                    style={{
-                      borderColor: "var(--border)",
-                      color: "var(--foreground)",
-                    }}
-                    onFocus={(e) =>
-                      (e.currentTarget.style.borderColor = "var(--muted)")
-                    }
-                    onBlur={(e) =>
-                      (e.currentTarget.style.borderColor = "var(--border)")
-                    }
+                    className="field"
                     placeholder="Your name"
                   />
                 </div>
@@ -162,17 +152,7 @@ export default function Contact() {
                     type="email"
                     required
                     maxLength={200}
-                    className="w-full bg-transparent border px-4 py-3 text-sm outline-none transition-colors duration-150"
-                    style={{
-                      borderColor: "var(--border)",
-                      color: "var(--foreground)",
-                    }}
-                    onFocus={(e) =>
-                      (e.currentTarget.style.borderColor = "var(--muted)")
-                    }
-                    onBlur={(e) =>
-                      (e.currentTarget.style.borderColor = "var(--border)")
-                    }
+                    className="field"
                     placeholder="you@example.com"
                   />
                 </div>
@@ -191,23 +171,13 @@ export default function Contact() {
                     required
                     rows={5}
                     maxLength={3000}
-                    className="w-full bg-transparent border px-4 py-3 text-sm outline-none transition-colors duration-150 resize-none"
-                    style={{
-                      borderColor: "var(--border)",
-                      color: "var(--foreground)",
-                    }}
-                    onFocus={(e) =>
-                      (e.currentTarget.style.borderColor = "var(--muted)")
-                    }
-                    onBlur={(e) =>
-                      (e.currentTarget.style.borderColor = "var(--border)")
-                    }
+                    className="field resize-none"
                     placeholder="Describe your project…"
                   />
                 </div>
 
                 {status === "error" && (
-                  <p className="text-sm" style={{ color: "#e87070" }}>
+                  <p className="text-sm text-danger" role="alert">
                     {errorMsg}
                   </p>
                 )}
@@ -215,20 +185,7 @@ export default function Contact() {
                 <button
                   type="submit"
                   disabled={status === "loading"}
-                  className="self-start text-xs tracking-[0.15em] uppercase px-6 py-3 border transition-colors duration-150 disabled:opacity-50"
-                  style={{
-                    borderColor: "var(--foreground)",
-                    color: "var(--foreground)",
-                    backgroundColor: "transparent",
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.backgroundColor = "var(--foreground)";
-                    e.currentTarget.style.color = "var(--background)";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.backgroundColor = "transparent";
-                    e.currentTarget.style.color = "var(--foreground)";
-                  }}
+                  className="btn btn-primary btn-lg self-start"
                 >
                   {status === "loading" ? "Sending…" : "Send message"}
                 </button>

@@ -1,22 +1,65 @@
 @import "tailwindcss";
 
+/* ------------------------------------------------------------------
+   Design tokens — light-first. Every color used by components should
+   come from here (via var(--x) or the Tailwind names mapped below).
+   ------------------------------------------------------------------ */
 :root {
   --navbar-h: 4rem;
-  --background: #0C0C0C;
-  --surface: #141414;
-  --border: #222222;
-  --foreground: #EDE9E3;
-  --muted: #9A9590;
+
+  /* Light surfaces */
+  --background: #F7F7F4;
+  --surface: #FFFFFF;
+  --foreground: #191C1B;
+  --muted: #646D68;
+  --border: #DFE3DD;
+  --border-strong: #C5CCC4;
+
+  /* Brand */
   --accent: #F0BC2E;
+  --accent-hover: #E6AF17;
+  --accent-soft: #FBF2D3;
+  --on-accent: #191C1B;
+
+  /* Status */
+  --danger: #B42318;
+
+  /* Focus ring (overridden inside dark sections) */
+  --ring: #191C1B;
+
+  /* Dark sections (portfolio, Phase 2) — apply with the .theme-dark class */
+  --dark-background: #191C1B;
+  --dark-surface: #232826;
+  --dark-foreground: #F2F1EC;
+  --dark-muted: #A9B1AB;
+  --dark-border: #343B38;
+
+  --shadow-soft:
+    0 1px 2px rgb(25 28 27 / 0.04), 0 16px 40px -16px rgb(25 28 27 / 0.14);
+}
+
+.theme-dark {
+  --background: var(--dark-background);
+  --surface: var(--dark-surface);
+  --foreground: var(--dark-foreground);
+  --muted: var(--dark-muted);
+  --border: var(--dark-border);
+  --border-strong: #475049;
+  --ring: var(--accent);
+  background-color: var(--background);
+  color: var(--foreground);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-surface: var(--surface);
   --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
   --color-foreground: var(--foreground);
   --color-muted: var(--muted);
   --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-danger: var(--danger);
   --font-sans: var(--font-inter);
   --font-display: var(--font-cormorant);
 }
@@ -27,6 +70,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: var(--navbar-h);
 }
 
 body {
@@ -39,5 +83,129 @@ body {
 
 ::selection {
   background-color: var(--accent);
-  color: #0C0C0C;
+  color: var(--on-accent);
+}
+
+/* Visible keyboard focus everywhere */
+:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 3px;
+}
+
+/* Shared interface components */
+@layer components {
+  /* Single centered page container: nav, hero, sections and footer all align to it */
+  .site-container {
+    width: 100%;
+    max-width: 80rem;
+    margin-inline: auto;
+    padding-inline: clamp(1.5rem, 5vw, 5rem);
+  }
+
+  .link-muted {
+    color: var(--muted);
+    transition: color 150ms ease;
+  }
+  .link-muted:hover {
+    color: var(--foreground);
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border: 1px solid transparent;
+    border-radius: 2px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: 0.01em;
+    white-space: nowrap;
+    cursor: pointer;
+    transition:
+      background-color 150ms ease,
+      border-color 150ms ease,
+      color 150ms ease;
+  }
+  .btn-md {
+    padding: 0.75rem 1.25rem;
+  }
+  .btn-lg {
+    padding: 1rem 1.5rem;
+  }
+  .btn-primary {
+    background-color: var(--accent);
+    border-color: var(--accent);
+    color: var(--on-accent);
+  }
+  .btn-primary:hover {
+    background-color: var(--accent-hover);
+    border-color: var(--accent-hover);
+  }
+  .btn-secondary {
+    background-color: transparent;
+    border-color: var(--border-strong);
+    color: var(--foreground);
+  }
+  .btn-secondary:hover {
+    background-color: var(--surface);
+    border-color: var(--foreground);
+  }
+  .btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+  .btn .btn-arrow {
+    transition: transform 150ms ease;
+  }
+  .btn:hover .btn-arrow {
+    transform: translateX(2px);
+  }
+
+  .field {
+    width: 100%;
+    background-color: var(--surface);
+    border: 1px solid var(--border-strong);
+    color: var(--foreground);
+    padding: 0.75rem 1rem;
+    font-size: 0.875rem;
+    transition: border-color 150ms ease;
+  }
+  .field::placeholder {
+    color: var(--muted);
+    opacity: 0.8;
+  }
+  .field:hover {
+    border-color: var(--muted);
+  }
+  .field:focus {
+    border-color: var(--foreground);
+  }
+
+  .skip-link {
+    position: fixed;
+    top: 0.75rem;
+    left: 0.75rem;
+    z-index: 100;
+    transform: translateY(-200%);
+    background-color: var(--foreground);
+    color: var(--background);
+    padding: 0.625rem 1rem;
+    font-size: 0.875rem;
+  }
+  .skip-link:focus {
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

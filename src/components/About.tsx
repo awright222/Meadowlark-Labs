@@ -13,10 +13,11 @@ const inView = (delay = 0) => ({
 export default function About() {
   return (
     <section
+      id="about"
       className="py-32 border-t"
       style={{ borderColor: "var(--border)" }}
     >
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="site-container">
         <motion.div className="flex items-center gap-4 mb-16" {...inView()}>
           <div
             className="w-8 h-px"

@@ -1,11 +1,13 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
+
+const ease = [0.22, 1, 0.36, 1] as [number, number, number, number];
 
 const fadeUp = (delay = 0) => ({
-  initial: { opacity: 0, y: 16 },
+  initial: { opacity: 0, y: 14 },
   animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as [number, number, number, number], delay },
+  transition: { duration: 0.6, ease, delay },
 });
 
 const draw = (delay = 0, duration = 0.9) => ({
@@ -17,31 +19,52 @@ const draw = (delay = 0, duration = 0.9) => ({
   },
 });
 
+const products = ["DealForge", "BuildGrade", "YardCalc", "OppMap"];
+
+function Arrow() {
+  return (
+    <svg
+      width="14"
+      height="14"
+      viewBox="0 0 14 14"
+      fill="none"
+      aria-hidden="true"
+      className="btn-arrow"
+    >
+      <path
+        d="M1 7h12M8 2l5 5-5 5"
+        stroke="currentColor"
+        strokeWidth="1.4"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 export default function Hero() {
+  const reduceMotion = useReducedMotion();
+  const line = (delay: number, duration: number) =>
+    reduceMotion ? {} : draw(delay, duration);
+
   return (
     <section
-      className="min-h-screen flex flex-col justify-center"
+      className="lg:min-h-screen flex flex-col justify-center"
       style={{ paddingTop: "var(--navbar-h)" }}
     >
-      <div className="max-w-7xl mx-auto w-full py-32 px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-0 items-center">
-
+      <div className="site-container py-16 sm:py-24 lg:py-32 grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
         {/* Left: text */}
-        <div>
-          <motion.p
-            className="text-xs tracking-[0.2em] uppercase mb-8"
-            style={{ color: "var(--accent)" }}
-            {...fadeUp(0.1)}
-          >
-            Meadowlark Labs
-          </motion.p>
+        <div className="lg:col-span-7">
+          <motion.div className="flex items-center gap-3 mb-8" {...fadeUp(0.05)}>
+            <span className="block w-8 h-0.5 bg-accent" aria-hidden="true" />
+            <p className="text-xs font-medium tracking-[0.18em] uppercase text-muted">
+              Independent software studio
+            </p>
+          </motion.div>
 
           <motion.h1
-            className="text-6xl sm:text-7xl md:text-8xl font-light leading-[1.05] mb-10"
-            style={{
-              fontFamily: "var(--font-cormorant)",
-              color: "var(--foreground)",
-            }}
-            {...fadeUp(0.2)}
+            className="font-display text-5xl sm:text-6xl lg:text-7xl xl:text-[5.25rem] font-normal leading-[1.04] tracking-[-0.01em] text-foreground mb-8"
+            {...fadeUp(0.15)}
           >
             Software built
             <br />
@@ -51,137 +74,100 @@ export default function Hero() {
           </motion.h1>
 
           <motion.p
-            className="text-base sm:text-lg max-w-lg leading-relaxed mb-6"
-            style={{ color: "var(--muted)" }}
-            {...fadeUp(0.35)}
+            className="text-base sm:text-lg leading-relaxed max-w-xl text-muted"
+            {...fadeUp(0.28)}
           >
-            Through Meadowlark Labs, I build software products and occasionally partner with businesses to create websites, applications, and internal tools.
+            I build websites, custom web applications, and practical software
+            tools for businesses. Through Meadowlark Labs, I also develop my own
+            products and bring the same thoughtful approach to every project.
           </motion.p>
 
-          <motion.p
-            className="text-base sm:text-lg max-w-lg leading-relaxed"
-            style={{ color: "var(--muted)" }}
-            {...fadeUp(0.42)}
+          <motion.div
+            className="mt-10 flex flex-col sm:flex-row gap-3 sm:gap-4"
+            {...fadeUp(0.4)}
           >
-            Whether it&rsquo;s a customer-facing product or software behind the scenes, my goal is the same: build something dependable, intuitive, and genuinely useful.
-          </motion.p>
-
-          <motion.div className="mt-16 flex items-center gap-3" {...fadeUp(0.5)}>
-            <div
-              className="w-8 h-px"
-              style={{ backgroundColor: "var(--border)" }}
-            />
-            <a
-              href="#work"
-              className="text-xs tracking-[0.15em] uppercase transition-colors duration-150"
-              style={{ color: "var(--muted)" }}
-              onMouseEnter={(e) =>
-                (e.currentTarget.style.color = "var(--foreground)")
-              }
-              onMouseLeave={(e) =>
-                (e.currentTarget.style.color = "var(--muted)")
-              }
-            >
-              View My Work
+            <a href="#contact" className="btn btn-primary btn-lg">
+              Start a project
+              <Arrow />
+            </a>
+            <a href="#work" className="btn btn-secondary btn-lg">
+              Explore my work
             </a>
           </motion.div>
 
-          <motion.div className="mt-12 flex flex-wrap gap-x-6 gap-y-2" {...fadeUp(0.58)}>
-            {["DealForge", "BuildGrade", "YardCalc", "OppMap"].map((name) => (
-              <span
-                key={name}
-                className="text-xs tracking-[0.12em] uppercase"
-                style={{ color: "#2e2e2e" }}
-              >
-                {name}
-              </span>
-            ))}
+          <motion.div
+            className="mt-14 pt-6 border-t border-border max-w-xl"
+            {...fadeUp(0.5)}
+          >
+            <p className="text-xs tracking-[0.15em] uppercase text-muted mb-3">
+              Products I&rsquo;ve built
+            </p>
+            <ul className="flex flex-wrap gap-x-6 gap-y-2 text-sm font-medium text-foreground">
+              {products.map((name) => (
+                <li key={name}>{name}</li>
+              ))}
+            </ul>
           </motion.div>
         </div>
 
-        {/* Right: self-drawing geometric wireframe */}
-        <div className="hidden lg:flex items-center justify-end pr-8" aria-hidden="true">
-          <svg
-            viewBox="0 0 480 520"
-            fill="none"
-            className="w-full max-w-sm xl:max-w-md"
-          >
-            {/* Outermost frame */}
-            <motion.path
-              d="M 14,14 L 466,14 L 466,506 L 14,506 Z"
-              stroke="#363636"
-              strokeWidth="1"
-              {...draw(0.4, 1.4)}
-            />
-            {/* Second frame */}
-            <motion.path
-              d="M 58,56 L 422,56 L 422,458 L 58,458 Z"
-              stroke="#2e2e2e"
-              strokeWidth="1"
-              {...draw(0.85, 1.1)}
-            />
-            {/* Inner frame */}
-            <motion.path
-              d="M 106,106 L 374,106 L 374,400 L 106,400 Z"
-              stroke="#282828"
-              strokeWidth="1"
-              {...draw(1.2, 0.9)}
-            />
-            {/* Top card — left */}
-            <motion.path
-              d="M 128,128 L 228,128 L 228,192 L 128,192 Z"
-              stroke="#262626"
-              strokeWidth="0.75"
-              {...draw(1.55, 0.55)}
-            />
-            {/* Top card — right */}
-            <motion.path
-              d="M 248,128 L 352,128 L 352,192 L 248,192 Z"
-              stroke="#262626"
-              strokeWidth="0.75"
-              {...draw(1.68, 0.55)}
-            />
-            {/* Data rows */}
-            <motion.path
-              d="M 128,230 L 352,230"
-              stroke="#222222"
-              strokeWidth="0.75"
-              {...draw(1.95, 0.4)}
-            />
-            <motion.path
-              d="M 128,256 L 312,256"
-              stroke="#222222"
-              strokeWidth="0.75"
-              {...draw(2.05, 0.38)}
-            />
-            <motion.path
-              d="M 128,282 L 330,282"
-              stroke="#222222"
-              strokeWidth="0.75"
-              {...draw(2.14, 0.38)}
-            />
-            <motion.path
-              d="M 128,308 L 288,308"
-              stroke="#222222"
-              strokeWidth="0.75"
-              {...draw(2.22, 0.35)}
-            />
-            {/* Bottom stat bars */}
-            <motion.path
-              d="M 128,352 L 218,352 L 218,376 L 128,376 Z"
-              stroke="#252525"
-              strokeWidth="0.75"
-              {...draw(2.4, 0.45)}
-            />
-            <motion.path
-              d="M 238,352 L 352,352 L 352,376 L 238,376 Z"
-              stroke="#252525"
-              strokeWidth="0.75"
-              {...draw(2.5, 0.45)}
-            />
-          </svg>
-        </div>
-
+        {/* Right: restrained decorative composition */}
+        <motion.div
+          className="hidden lg:flex lg:col-span-5 justify-end"
+          aria-hidden="true"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+        >
+          <div className="w-full max-w-md bg-surface border border-border shadow-[var(--shadow-soft)] p-6">
+            <svg viewBox="0 0 400 440" fill="none" className="w-full h-auto">
+              <motion.path
+                d="M 12,12 H 388 V 428 H 12 Z"
+                className="stroke-border-strong"
+                strokeWidth="1"
+                {...line(0.4, 1.3)}
+              />
+              <motion.path
+                d="M 44,44 H 356 V 396 H 44 Z"
+                className="stroke-border"
+                strokeWidth="1"
+                {...line(0.8, 1.1)}
+              />
+              <motion.path
+                d="M 68,68 H 180 V 132 H 68 Z"
+                className="stroke-border-strong"
+                strokeWidth="1"
+                {...line(1.2, 0.6)}
+              />
+              <motion.path
+                d="M 200,68 H 332 V 132 H 200 Z"
+                className="stroke-accent fill-accent-soft"
+                strokeWidth="1.25"
+                {...line(1.35, 0.6)}
+              />
+              {[172, 198, 224, 250].map((y, i) => (
+                <motion.path
+                  key={y}
+                  d={`M 68,${y} H ${[332, 284, 308, 244][i]}`}
+                  className="stroke-border-strong"
+                  strokeWidth="1"
+                  {...line(1.7 + i * 0.1, 0.4)}
+                />
+              ))}
+              <motion.path
+                d="M 68,300 H 176 V 344 H 68 Z"
+                className="stroke-border"
+                strokeWidth="1"
+                {...line(2.1, 0.45)}
+              />
+              <motion.path
+                d="M 196,300 H 332 V 344 H 196 Z"
+                className="stroke-border"
+                strokeWidth="1"
+                {...line(2.2, 0.45)}
+              />
+            </svg>
+          </div>
+        </motion.div>
       </div>
     </section>
   );
