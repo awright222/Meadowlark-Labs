@@ -231,9 +231,6 @@ h1, h2, h3 {
 @keyframes hero-slide {
   from { transform: translateY(14px); }
 }
-@keyframes hero-fade {
-  from { opacity: 0; }
-}
 .hero-rise {
   animation: hero-rise 0.6s cubic-bezier(0.22, 1, 0.36, 1) var(--delay, 0s) backwards;
 }
@@ -241,8 +238,74 @@ h1, h2, h3 {
 .hero-slide {
   animation: hero-slide 0.6s cubic-bezier(0.22, 1, 0.36, 1) var(--delay, 0s) backwards;
 }
-.hero-fade {
-  animation: hero-fade 0.8s ease-out var(--delay, 0s) backwards;
+/* ------------------------------------------------------------------
+   Meadowlark bird: one-time trace-in (about 2.7s), then fully static.
+   Layers: ink/gold fills underneath, a thin pen outline on top.
+   Timeline (seconds):
+     pen outline   0.00-1.50   five contours trace in (see nth-child notes)
+     wing fill     0.70-1.30
+     body fill     0.95-1.55
+     tail fill     1.05-1.65
+     head fill     1.15-1.75
+     gold breast   1.70-2.30   clipped sweep
+     wordmark      2.00-2.70   fade + small rise
+   Fills overlap closely so the seams between groups never show as a hard edge.
+   The base styles are the finished logo; each animation only describes the way
+   in ("from" keyframes + backwards fill). With no JavaScript, in print, or with
+   reduced motion, the static logo is what you get.
+   ------------------------------------------------------------------ */
+.bird-art {
+  animation: bird-settle 2.4s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+}
+.bird-fill {
+  animation: bird-fill 0.6s ease-out var(--f) backwards;
+}
+.bird-fill[data-part="wing-upper"] { --f: 0.7s; }
+.bird-fill[data-part="body"]       { --f: 0.95s; }
+.bird-fill[data-part="tail"]       { --f: 1.05s; }
+.bird-fill[data-part="head"]       { --f: 1.15s; }
+.bird-lines path {
+  /* pathLength="1" on each contour lets one dash pattern describe its whole length */
+  stroke: var(--foreground);
+  stroke-width: 2.2;
+  stroke-linejoin: round;
+  stroke-dasharray: 1 1;
+  stroke-opacity: 0;
+  animation: bird-trace var(--t) cubic-bezier(0.45, 0, 0.2, 1) var(--d) backwards;
+}
+/* 1 long upper feather, back, head, belly  2 small upper feather
+   3 lower wing and tail                    4 eye stripe   5 chin sliver */
+.bird-lines path:nth-child(1) { --d: 0s;    --t: 1.5s; }
+.bird-lines path:nth-child(2) { --d: 0.06s; --t: 0.7s; }
+.bird-lines path:nth-child(3) { --d: 0.12s; --t: 1.25s; }
+.bird-lines path:nth-child(4) { --d: 0.85s; --t: 0.5s; }
+.bird-lines path:nth-child(5) { --d: 0.95s; --t: 0.5s; }
+.bird-breast {
+  animation: bird-sweep 0.6s cubic-bezier(0.4, 0, 0.2, 1) 1.7s backwards;
+}
+.bird-wordmark {
+  animation: bird-wordmark 0.7s cubic-bezier(0.22, 1, 0.36, 1) 2s backwards;
+}
+@keyframes bird-trace {
+  from { stroke-dashoffset: 1; stroke-opacity: 1; }
+  78%  { stroke-dashoffset: 0; stroke-opacity: 1; }
+  to   { stroke-dashoffset: 0; stroke-opacity: 0; }
+}
+@keyframes bird-fill {
+  from { fill-opacity: 0; }
+}
+/* The opacity ramp keeps this graceful in any browser that resolves the
+   clip-path box differently: worst case it is a plain fade. */
+@keyframes bird-sweep {
+  from { clip-path: polygon(0 0, 0 0, 0 100%, 0 100%); opacity: 0; }
+  30%  { opacity: 1; }
+  to   { clip-path: polygon(0 0, 100% 0, 140% 100%, 0 100%); opacity: 1; }
+}
+@keyframes bird-wordmark {
+  from { opacity: 0; transform: translateY(8px); }
+}
+@keyframes bird-settle {
+  from { transform: translateY(6px) scale(0.99); }
 }
 
 /* Scroll reveal for below-the-fold sections. Transform only: opacity is never
@@ -260,7 +323,12 @@ h1, h2, h3 {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .reveal {
+  .reveal,
+  .bird-art,
+  .bird-fill,
+  .bird-lines path,
+  .bird-breast,
+  .bird-wordmark {
     animation: none !important;
   }
   html {
