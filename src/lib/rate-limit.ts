@@ -1,6 +1,10 @@
 // ============================================
 // In-memory sliding window rate limiter
 // ============================================
+// Best-effort only: state lives in one server instance's memory, so on Vercel it
+// resets on cold starts and is not shared between concurrent instances. It stops
+// casual repeat submissions; for a hard limit, add a Vercel Firewall rate-limit
+// rule for POST /api/contact (no code change needed).
 
 interface RateLimitEntry {
   timestamps: number[];

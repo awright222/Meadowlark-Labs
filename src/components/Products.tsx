@@ -113,7 +113,7 @@ export default function Products() {
                     {p.description}
                   </p>
 
-                  <div className="mt-auto flex items-center justify-between gap-4 border-t border-border pt-4">
+                  <div className="mt-auto flex flex-wrap items-center justify-between gap-x-4 gap-y-2 border-t border-border pt-4">
                     <a
                       href={p.href}
                       target="_blank"

@@ -86,6 +86,11 @@ body {
   color: var(--on-accent);
 }
 
+/* Only breaks a word when it can't fit its line (e.g. enlarged text on a narrow screen). */
+h1, h2, h3 {
+  overflow-wrap: break-word;
+}
+
 /* Visible keyboard focus everywhere */
 :focus-visible {
   outline: 2px solid var(--ring);
@@ -119,20 +124,23 @@ body {
     border-radius: 2px;
     font-size: 0.875rem;
     font-weight: 500;
-    line-height: 1;
+    line-height: 1.2;
     letter-spacing: 0.01em;
-    white-space: nowrap;
+    text-align: center;
+    max-width: 100%;
     cursor: pointer;
     transition:
       background-color 150ms ease,
       border-color 150ms ease,
       color 150ms ease;
   }
+  /* line-height 1.2 lets text wrap when scaled; padding is trimmed 0.1em per side
+     so single-line buttons keep their original height. */
   .btn-md {
-    padding: 0.75rem 1.25rem;
+    padding: calc(0.75rem - 0.1em) 1.25rem;
   }
   .btn-lg {
-    padding: 1rem 1.5rem;
+    padding: calc(1rem - 0.1em) 1.5rem;
   }
   .btn-primary {
     background-color: var(--accent);
@@ -214,12 +222,53 @@ body {
   outline-offset: 6px;
 }
 
+/* Hero entrance motion. CSS-only, and "backwards" fill means the elements are in
+   their normal, visible state whenever the animation is not running (no JS,
+   reduced motion, or finished). */
+@keyframes hero-rise {
+  from { opacity: 0; transform: translateY(14px); }
+}
+@keyframes hero-slide {
+  from { transform: translateY(14px); }
+}
+@keyframes hero-fade {
+  from { opacity: 0; }
+}
+.hero-rise {
+  animation: hero-rise 0.6s cubic-bezier(0.22, 1, 0.36, 1) var(--delay, 0s) backwards;
+}
+/* No opacity change, so the headline and lead paragraph paint immediately (LCP). */
+.hero-slide {
+  animation: hero-slide 0.6s cubic-bezier(0.22, 1, 0.36, 1) var(--delay, 0s) backwards;
+}
+.hero-fade {
+  animation: hero-fade 0.8s ease-out var(--delay, 0s) backwards;
+}
+
+/* Scroll reveal for below-the-fold sections. Transform only: opacity is never
+   changed, so content is fully visible in the HTML, without JavaScript, in
+   unsupported browsers, in print, and before it scrolls into view. */
+@keyframes reveal-rise {
+  from { transform: translateY(16px); }
+}
+@supports (animation-timeline: view()) {
+  .reveal {
+    animation: reveal-rise linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 40%;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
+  .reveal {
+    animation: none !important;
+  }
   html {
     scroll-behavior: auto;
   }
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
+    animation-delay: 0s !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }

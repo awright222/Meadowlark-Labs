@@ -1,12 +1,18 @@
 "use client";
 
-import { useState, FormEvent } from "react";
+import { useEffect, useRef, useState, FormEvent } from "react";
 
 type Status = "idle" | "loading" | "success" | "error";
 
 export default function Contact() {
   const [status, setStatus] = useState<Status>("idle");
   const [errorMsg, setErrorMsg] = useState("");
+  const statusRef = useRef<HTMLDivElement>(null);
+
+  // The form is replaced by the confirmation, so move focus there instead of losing it.
+  useEffect(() => {
+    if (status === "success") statusRef.current?.focus();
+  }, [status]);
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -18,6 +24,7 @@ export default function Contact() {
       name: (form.elements.namedItem("name") as HTMLInputElement).value,
       email: (form.elements.namedItem("email") as HTMLInputElement).value,
       message: (form.elements.namedItem("message") as HTMLTextAreaElement).value,
+      org_notes: (form.elements.namedItem("org_notes") as HTMLInputElement).value,
     };
 
     try {
@@ -28,8 +35,8 @@ export default function Contact() {
       });
 
       if (!res.ok) {
-        const json = await res.json();
-        setErrorMsg(json.error ?? "Something went wrong.");
+        const json = await res.json().catch(() => null);
+        setErrorMsg(json?.error ?? "Something went wrong. Please try again.");
         setStatus("error");
         return;
       }
@@ -95,22 +102,32 @@ export default function Contact() {
               it&rsquo;s for, and anything you already have in place.
             </p>
 
-            {status === "success" ? (
-              <div className="py-8">
-                <p
-                  className="text-2xl font-light mb-3"
-                  style={{
-                    fontFamily: "var(--font-cormorant)",
-                    color: "var(--foreground)",
-                  }}
-                >
-                  Message received.
-                </p>
-                <p className="text-sm" style={{ color: "var(--muted)" }}>
-                  I&rsquo;ll be in touch.
-                </p>
-              </div>
-            ) : (
+            <div
+              ref={statusRef}
+              role="status"
+              aria-live="polite"
+              tabIndex={-1}
+              className="outline-none"
+            >
+              {status === "success" && (
+                <div className="py-8">
+                  <p
+                    className="text-2xl font-light mb-3"
+                    style={{
+                      fontFamily: "var(--font-cormorant)",
+                      color: "var(--foreground)",
+                    }}
+                  >
+                    Message received.
+                  </p>
+                  <p className="text-sm" style={{ color: "var(--muted)" }}>
+                    I&rsquo;ll be in touch.
+                  </p>
+                </div>
+              )}
+            </div>
+
+            {status !== "success" && (
               <form onSubmit={handleSubmit} className="flex flex-col gap-5">
                 <div>
                   <label
@@ -124,6 +141,7 @@ export default function Contact() {
                     id="name"
                     name="name"
                     type="text"
+                    autoComplete="name"
                     required
                     maxLength={100}
                     className="field"
@@ -143,6 +161,7 @@ export default function Contact() {
                     id="email"
                     name="email"
                     type="email"
+                    autoComplete="email"
                     required
                     maxLength={200}
                     className="field"
@@ -166,6 +185,21 @@ export default function Contact() {
                     maxLength={3000}
                     className="field resize-none"
                     placeholder="Describe your project…"
+                  />
+                </div>
+
+                {/* Honeypot: hidden from people and assistive tech; bots tend to fill it. */}
+                <div
+                  aria-hidden="true"
+                  className="absolute -left-[9999px] h-0 w-0 overflow-hidden"
+                >
+                  <label htmlFor="org_notes">Leave this field empty</label>
+                  <input
+                    id="org_notes"
+                    name="org_notes"
+                    type="text"
+                    tabIndex={-1}
+                    autoComplete="off"
                   />
                 </div>
 

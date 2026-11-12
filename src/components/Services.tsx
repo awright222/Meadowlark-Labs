@@ -77,7 +77,7 @@ export default function Services() {
                         className="mt-[0.7em] block h-px w-4 shrink-0 bg-border-strong"
                         aria-hidden="true"
                       />
-                      {e}
+                      <span className="min-w-0 [overflow-wrap:anywhere]">{e}</span>
                     </li>
                   ))}
                 </ul>

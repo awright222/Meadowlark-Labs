@@ -1,8 +1,28 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { SITE_NAME } from "@/lib/site";
+
+const description =
+  "How Meadowlark Labs handles the information you share through the contact form.";
 
 export const metadata: Metadata = {
   title: "Privacy Policy — Meadowlark Labs",
+  description,
+  alternates: { canonical: "/privacy" },
+  openGraph: {
+    title: "Privacy Policy — Meadowlark Labs",
+    description,
+    url: "/privacy",
+    siteName: SITE_NAME,
+    type: "website",
+    images: [{ url: "/opengraph-image.png", width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Privacy Policy — Meadowlark Labs",
+    description,
+    images: ["/twitter-image.png"],
+  },
 };
 
 export default function Privacy() {
@@ -24,7 +44,7 @@ export default function Privacy() {
           Privacy Policy
         </h1>
         <p className="text-xs mb-16" style={{ color: "var(--muted)" }}>
-          Last updated May 4, 2026
+          Last updated November 11, 2026
         </p>
 
         <div className="flex flex-col gap-10 text-sm leading-relaxed" style={{ color: "var(--muted)" }}>
@@ -37,9 +57,13 @@ export default function Privacy() {
             </h2>
             <p>
               When you submit the contact form on this site, we collect your
-              name, email address, and the message you provide. We do not
-              collect any other personal information, and we do not use cookies
-              or tracking scripts on this site.
+              name, email address, and the message you provide. To help limit
+              repeated or automated submissions, the server temporarily holds
+              your IP address, together with the time of your request, in
+              short-lived memory. It is not written to a database and is not
+              included in the message we receive. We do not otherwise collect
+              personal information through this site, and we do not use cookies
+              or tracking scripts.
             </p>
           </section>
 

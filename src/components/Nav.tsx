@@ -52,16 +52,16 @@ export default function Nav() {
         style={{ height: "var(--navbar-h)" }}
       >
         {/* Wordmark */}
-        <Link href="/" className="flex items-center gap-2 -ml-2">
+        <Link href="/" className="flex min-w-0 items-center gap-2 -ml-2">
           <Image
             src="/logo.png"
             alt=""
             width={56}
             height={56}
-            className="object-contain"
+            className="shrink-0 object-contain"
             priority
           />
-          <span className="text-sm font-medium tracking-wide text-foreground">
+          <span className="min-w-0 text-sm font-medium leading-tight tracking-wide text-foreground [overflow-wrap:anywhere]">
             Meadowlark Labs
           </span>
         </Link>
@@ -82,7 +82,7 @@ export default function Nav() {
         <button
           ref={toggleRef}
           type="button"
-          className="md:hidden -mr-2 p-2 text-foreground"
+          className="md:hidden shrink-0 -mr-2 p-2 text-foreground"
           onClick={() => setMenuOpen((v) => !v)}
           aria-label={menuOpen ? "Close menu" : "Open menu"}
           aria-expanded={menuOpen}

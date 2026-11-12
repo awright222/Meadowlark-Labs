@@ -2,7 +2,7 @@
 // API Route: /api/contact — Send Contact Form
 // ============================================
 // POST endpoint that forwards inquiries via Resend.
-// Rate-limited to 3 submissions per IP per minute.
+// Best-effort rate limit: 3 submissions per IP per minute (see src/lib/rate-limit.ts).
 
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
@@ -10,6 +10,27 @@ import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
 
 const RATE_LIMIT = { maxRequests: 3, windowMs: 60_000 };
 const TO_EMAIL = "alex@meadowlark-labs.com";
+const MAX_NAME = 100;
+const MAX_EMAIL = 200;
+// RFC 5321 limit; longer local parts are rejected by Resend with a 422.
+const MAX_EMAIL_LOCAL_PART = 64;
+const MAX_MESSAGE = 3000;
+
+// C0/C1 control characters plus Unicode line/paragraph separators.
+const CONTROL_CHARS = /[\u0000-\u001F\u007F-\u009F\u2028\u2029]/g;
+// Non-global twin for .test(): a shared /g regex keeps lastIndex between calls.
+const HAS_CONTROL_CHARS = /[\u0000-\u001F\u007F-\u009F\u2028\u2029]/;
+// Same, but keeps tab, line feed and carriage return for the message body.
+const BODY_CONTROL_CHARS =
+  /[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F-\u009F\u2028\u2029]/g;
+
+function singleLine(value: string) {
+  return value.replace(CONTROL_CHARS, " ").replace(/\s+/g, " ").trim();
+}
+
+function badRequest(error: string) {
+  return NextResponse.json({ error }, { status: 400 });
+}
 
 function getResend() {
   return new Resend(process.env.RESEND_API_KEY);
@@ -18,8 +39,7 @@ function getResend() {
 export async function POST(request: NextRequest) {
   try {
     // ── Rate limit ──────────────────────────────
-    const clientIp = getClientIp(request);
-    const rl = checkRateLimit(clientIp, RATE_LIMIT);
+    const rl = checkRateLimit(getClientIp(request), RATE_LIMIT);
     if (!rl.allowed) {
       return NextResponse.json(
         { error: "Too many requests. Please try again later." },
@@ -31,50 +51,45 @@ export async function POST(request: NextRequest) {
     }
 
     // ── Parse body ──────────────────────────────
-    const body = await request.json();
-    const { name, email, message } = body as {
-      name?: string;
-      email?: string;
-      message?: string;
-    };
+    let body: unknown;
+    try {
+      body = await request.json();
+    } catch {
+      return badRequest("Invalid request.");
+    }
+    if (typeof body !== "object" || body === null || Array.isArray(body)) {
+      return badRequest("Invalid request.");
+    }
+    const { name, email, message, org_notes } = body as Record<string, unknown>;
+
+    // ── Honeypot ────────────────────────────────
+    // Real visitors never see or fill this field. Reply as if it worked so bots
+    // get no signal, but send nothing.
+    if (typeof org_notes === "string" && org_notes.trim().length > 0) {
+      return NextResponse.json({ ok: true });
+    }
 
     // ── Validate ────────────────────────────────
-    if (!name || typeof name !== "string" || name.trim().length === 0) {
-      return NextResponse.json({ error: "Name is required." }, { status: 400 });
-    }
+    const safeName =
+      typeof name === "string" ? singleLine(name).slice(0, MAX_NAME) : "";
+    if (!safeName) return badRequest("Name is required.");
 
+    const safeEmail = typeof email === "string" ? email.trim() : "";
     if (
-      !email ||
-      typeof email !== "string" ||
-      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
+      safeEmail.length > MAX_EMAIL ||
+      safeEmail.indexOf("@") > MAX_EMAIL_LOCAL_PART ||
+      HAS_CONTROL_CHARS.test(safeEmail) ||
+      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(safeEmail)
     ) {
-      return NextResponse.json(
-        { error: "A valid email is required." },
-        { status: 400 }
-      );
+      return badRequest("A valid email is required.");
     }
 
-    if (
-      !message ||
-      typeof message !== "string" ||
-      message.trim().length === 0
-    ) {
-      return NextResponse.json(
-        { error: "Message is required." },
-        { status: 400 }
-      );
+    if (typeof message !== "string" || message.trim().length === 0) {
+      return badRequest("Message is required.");
     }
-
-    if (message.length > 3000) {
-      return NextResponse.json(
-        { error: "Message is too long." },
-        { status: 400 }
-      );
-    }
-
-    const safeName = name.trim().slice(0, 100);
-    const safeEmail = email.trim().slice(0, 200);
-    const safeMessage = message.trim();
+    if (message.length > MAX_MESSAGE) return badRequest("Message is too long.");
+    const safeMessage = message.replace(BODY_CONTROL_CHARS, "").trim();
+    if (!safeMessage) return badRequest("Message is required.");
 
     // ── Send email ──────────────────────────────
     const { error } = await getResend().emails.send({
@@ -88,13 +103,12 @@ export async function POST(request: NextRequest) {
         safeMessage,
         "",
         "---",
-        `IP: ${clientIp}`,
         `Timestamp: ${new Date().toISOString()}`,
       ].join("\n"),
     });
 
     if (error) {
-      console.error("[contact] Resend error:", error);
+      console.error("[contact] Resend error:", error.name, error.message);
       return NextResponse.json(
         { error: "Failed to send message." },
         { status: 500 }
@@ -103,9 +117,12 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({ ok: true });
   } catch (err) {
-    console.error("[contact] Unexpected error:", err);
+    console.error(
+      "[contact] Unexpected error:",
+      err instanceof Error ? err.name : "unknown"
+    );
     return NextResponse.json(
-      { error: "Internal server error." },
+      { error: "Something went wrong. Please try again." },
       { status: 500 }
     );
   }

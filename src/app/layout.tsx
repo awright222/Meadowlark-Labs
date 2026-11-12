@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Cormorant_Garamond } from "next/font/google";
 import MotionProvider from "@/components/MotionProvider";
+import { SITE_DESCRIPTION, SITE_NAME, SITE_TITLE, SITE_URL } from "@/lib/site";
 import "./globals.css";
 
 const inter = Inter({
@@ -17,18 +18,23 @@ const cormorant = Cormorant_Garamond({
 });
 
 export const metadata: Metadata = {
-  title: "Meadowlark Labs — Alex Wright, Freelance Software Developer",
+  metadataBase: new URL(SITE_URL),
+  title: SITE_TITLE,
+  description: SITE_DESCRIPTION,
+  alternates: { canonical: "/" },
   verification: { google: "H2e_Ip5ozeSd72uGz7BVE1T6v5FZld-XPp5OVqHpQqw" },
-  description:
-    "Alex Wright is a freelance software developer and founder of Meadowlark Labs. He builds custom web applications, internal tools, and client software for businesses.",
   openGraph: {
-    title: "Meadowlark Labs — Alex Wright, Freelance Software Developer",
-    description:
-      "Alex Wright is a freelance software developer and founder of Meadowlark Labs. He builds custom web applications, internal tools, and client software for businesses.",
-    url: "https://meadowlark-labs.com",
-    siteName: "Meadowlark Labs",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    url: "/",
+    siteName: SITE_NAME,
     locale: "en_US",
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
   },
 };
 
@@ -47,20 +53,20 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "Person",
               name: "Alex Wright",
-              url: "https://meadowlark-labs.com",
-              jobTitle: "Freelance Software Developer",
+              url: SITE_URL,
+              jobTitle: "Founder",
               worksFor: {
                 "@type": "Organization",
-                name: "Meadowlark Labs",
-                url: "https://meadowlark-labs.com",
+                name: SITE_NAME,
+                url: SITE_URL,
+                description: SITE_DESCRIPTION,
               },
-              description:
-                "Alex Wright is a freelance software developer who builds custom web applications, internal tools, and client software for businesses.",
+              description: `Alex Wright is the founder of ${SITE_NAME}, an independent software studio that builds websites, custom web applications, and practical business tools for clients, and develops its own software products.`,
               knowsAbout: [
-                "Web Development",
-                "Software Development",
-                "Custom Web Applications",
-                "Internal Tools",
+                "Website development",
+                "Custom web applications",
+                "Internal business tools",
+                "Calculators and interactive tools",
               ],
               address: {
                 "@type": "PostalAddress",
